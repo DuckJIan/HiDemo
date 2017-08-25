@@ -25,6 +25,7 @@
             android:orientation="vertical"
             android:layout_marginBottom="20dp">
             <EditText
+                android:id="@+id/register_username"
                 android:layout_width="match_parent"
                 android:layout_height="48dip"
                 android:layout_margin="10dp"
@@ -37,6 +38,7 @@
                 android:layout_height="0.5dp"
                 android:background="@mipmap/base_horization_line" />
             <EditText
+                android:id="@+id/register_pass"
                 android:layout_width="match_parent"
                 android:layout_height="48dip"
                 android:layout_margin="10dp"
@@ -50,6 +52,7 @@
                 android:layout_height="0.5dp"
                 android:background="@mipmap/base_horization_line" />
             <EditText
+                android:id="@+id/register_pass_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="48dip"
                 android:layout_margin="10dp"

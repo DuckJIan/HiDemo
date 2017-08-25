@@ -12,8 +12,12 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.SaveListener;
+
+import static cn.bmob.v3.BmobUser.getCurrentUser;
 
 /**
  * Created by ZJ on 2017/8/18.
@@ -38,6 +42,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Bmob.initialize(this, "755c86d48170605ed782566c9d370d44");
 
         Button go_register = (Button)findViewById(R.id.go_register);
         Button login = (Button)findViewById(R.id.user_login);
@@ -54,20 +59,30 @@ public class LoginActivity extends BaseActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserModel.getInstance().login(userName.getText().toString(), userPassword.getText().toString(), new LogInListener() {
-                    @Override
-                    public void done(Object o, BmobException e) {
-                        if(e == null){
-                            //登陆成功
-                            startActivity(MainActivity.class,null,false);
-                        }else{
+//
+//                final LogInListener listener = new LogInListener() {
+//                    @Override
+//                    public void done(Object o, BmobException e) {
+//                        startActivity(MainActivity.class,null,true);
+//                    }
+//
+//                    @Override
+//                    public void done(Object o, Object o2) {
+//
+//                    }
+//                };
+                User user = new User();
+                user.setUsername(userName.getText().toString());
+                user.setPassword(userPassword.getText().toString());
+                user.login(new SaveListener<User>() {
 
+                    @Override
+                    public void done(User user, BmobException e) {
+                        if (e == null)
+                           startActivity(MainActivity.class,null,true);
+                        else{
+                            Toast.makeText(getApplicationContext(),"用户名或者密码不正确",Toast.LENGTH_SHORT).show();
                         }
-                    }
-
-                    @Override
-                    public void done(Object o, Object o2) {
-
                     }
                 });
             }

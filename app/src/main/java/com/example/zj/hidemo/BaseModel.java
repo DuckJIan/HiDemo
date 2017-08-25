@@ -14,7 +14,7 @@ public abstract class BaseModel {
 
     public static final int DEFAULT_LIMIT=20;
 
-    public Context getContext(){
-        return BmobIMApplication.INSTANCE();
-    }
+//    public Context getContext(){
+//        return BmobIMApplication.INSTANCE();
+//    }
 }
